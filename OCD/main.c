@@ -17,6 +17,17 @@ void change_position(int var1, int var2, int i, int** matrix){
     matrix[i+1][var1] = var2;
 }
 
+void print(int** matrix, int m, int n){
+    printf("Matriz ordenada pelas linhas a partir da original.\n");
+ 
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            printf("%d  ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 void sort(int n, int m, int c, int k, int p, int** matrix){
     int var2, var1;
     
@@ -33,14 +44,7 @@ void sort(int n, int m, int c, int k, int p, int** matrix){
     }
 
     /* Imprimindo a matriz depois de ordenada */
-    printf("Matriz ordenada pelas linhas a partir da original.\n");
-    for(int i=0; i<n; i++){
-        for(int j=0; j<
-            m; j++){
-            printf("%d  ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    print(matrix, m, n);
 }
 
 
