@@ -11,33 +11,39 @@ int ** new_matrix(int n, int m){
     return matrix;
 }
 
+void change_position(int var1, int var2, int i, int** matrix){
+    var2 = matrix[i][var1];
+    matrix[i][var1] = matrix[i+1][var1];
+    matrix[i+1][var1] = var2;
+}
+
 void sort(int n, int m, int c, int k, int p, int** matrix){
     int var2, var1;
-    printf("n:%d\nm:%d\n", n,m);
     
     for(int j=0; j<=m; j++){
         for(int i=0; i<p; i++){
             if(i>=k){
                 if(matrix[i][c] > matrix[i+1][c]){
                     for(var1=0; var1<m; var1++){
-                            var2 = matrix[i][var1];
-                            matrix[i][var1] = matrix[i+1][var1];
-                            matrix[i+1][var1] = var2;
+                        change_position(var1, var2, i, matrix);
                     }
                 }
             }
         }
     }
-    
+
     /* Imprimindo a matriz depois de ordenada */
-    printf("\nMatriz ordenada pelas linhas a partir da original.\n");
+    printf("Matriz ordenada pelas linhas a partir da original.\n");
     for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
+        for(int j=0; j<
+            m; j++){
             printf("%d  ", matrix[i][j]);
         }
         printf("\n");
     }
 }
+
+
 
 int main(int argc, const char* argv[]) {
     
@@ -69,12 +75,10 @@ int main(int argc, const char* argv[]) {
     fscanf(handler, "%d %d %d", &c, &k, &p);
     
     total = n*m;
-    printf("quantidade:%d\n\n", total);
     
     int line, column, value;
     for (i=0; i < total; i++) {
-            fscanf(handler, "%d %d %d", &line, &column, &value);
-            printf("i:%d | %d %d %d\n", i, line, column, value);
+        fscanf(handler, "%d %d %d", &line, &column, &value);
         matrix[line][column] = value;
     }
     sort(n, m, c, k, p, matrix);
