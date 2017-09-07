@@ -52,3 +52,62 @@ void inicializa_grafo(VERTICE *g, int max){
     }
 }
 
+bool aresta_existe_grafo(VERTICE *g, int origem, int destino){
+    NO* p = g[origem].inicio;
+    while(p){
+        if(p->v == destino) return true;
+        p = p->prox;
+    }
+    return false;
+}
+
+void inserir_aresta(VERTICE* g, int origem, int destino){
+    if(aresta_existe_grafo(g, origem, destino)) return;
+    
+    NO* novo = (NO*)malloc(sizeof(NO));
+    novo->v = destino;
+    novo->prox = g[origem].inicio;
+    g[origem].inicio = novo;
+}
+
+bool aresta_existe_matriz(MATRIZadj *m, int origem, int destino){
+    if(m->mat[origem][destino] == 1)
+        return true;
+    
+    return false;
+}
+
+
+void matriz_para_lista(MATRIZadj *m, VERTICE **g){
+    int origem, destino;
+    
+    for(origem = 1; origem<=m->numVertices; origem++){
+        for(destino = 1; destino<=m->numVertices; destino++){
+            if(aresta_existe_matriz(m, origem, destino)){
+                inserir_aresta(*g, origem, destino);
+            }
+        }
+    }
+}
+
+//Imprime o grafo em lista de adjancencia
+void print_full(VERTICE* g, int n){
+    int i;
+    NO* tmp;
+    for(i=1; i<=n; i++){
+        tmp = g[i].inicio;
+        printf("[%d]  |", i);
+        while(tmp != NULL){
+            printf("%d--->", tmp->v);
+            tmp = tmp->prox;
+        }
+        printf("\n");
+    }
+}
+
+int main(){
+    
+   
+    
+}
+
