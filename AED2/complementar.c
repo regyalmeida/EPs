@@ -7,17 +7,19 @@
 //
 
 
-#include <stdbool.h>   /* variaveis bool assumem valores "true" ou "false" */
+#include <stdbool.h>   /* variaveis bool assumem valores "true" ou "false" */ //MATRIZ ADJACENTE
 #include <stdio.h>
 #include <stdlib.h>
 
 #define MAXNUMVERTICES 100
 
+typedef int TipoPeso;
 typedef struct MATRIZadj{
     int mat[MAXNUMVERTICES + 1][MAXNUMVERTICES + 1];
     int numVertices;
     int numArestas;
 } MATRIZadj;
+typedef int TipoApontador;
 
 typedef struct estr {
     int v; // elemento
@@ -45,6 +47,18 @@ void inicializa_matriz(MATRIZadj *m, int nv) {
     m->numArestas = 0;
 }
 
+bool aresta_existe_matriz(MATRIZadj *m, int origem, int destino){
+    if(m->mat[origem][destino] == 1)
+        return true;
+    
+    return false;
+}
+
+void inserir_aresta_matriz(MATRIZadj* m, int linha, int coluna){
+    if(!aresta_existe_matriz(m, linha, coluna))
+        m->mat[linha][coluna] = 1;
+}
+
 void inicializa_grafo(VERTICE *g, int max){
     int i;
     for (i=1; i<=max; i++){
@@ -70,14 +84,6 @@ void inserir_aresta(VERTICE* g, int origem, int destino){
     g[origem].inicio = novo;
 }
 
-bool aresta_existe_matriz(MATRIZadj *m, int origem, int destino){
-    if(m->mat[origem][destino] == 1)
-        return true;
-    
-    return false;
-}
-
-
 void matriz_para_lista(MATRIZadj *m, VERTICE **g){
     int origem, destino;
     
@@ -89,7 +95,6 @@ void matriz_para_lista(MATRIZadj *m, VERTICE **g){
         }
     }
 }
-
 //Imprime o grafo em lista de adjancencia
 void print_full(VERTICE* g, int n){
     int i;
@@ -103,11 +108,42 @@ void print_full(VERTICE* g, int n){
         }
         printf("\n");
     }
+    printf("\n");
 }
 
-int main(){
-    
-   
-    
-}
+int main(int argc, char *argv[]){
 
+    FILE * arquivo = fopen(argv[1], "r");
+    if (!arquivo) {
+        printf("Não foi possível abrir o arquivo '%s'. Certifique-se de que ele existe. \n", argv[1]);
+        return 0;
+    }
+
+
+    int i;
+    int numero_vertices,numero_arestas;
+    int linha, coluna, valor;
+
+    /* lendo e armazenando valores do # vertices e # arestas */
+    fscanf(arquivo, "%d %d", &numero_vertices, &numero_arestas);
+
+    MATRIZadj* matriz = (MATRIZadj*)malloc(sizeof(MATRIZadj));
+    VERTICE *grafo = (VERTICE*)malloc(sizeof(VERTICE) * (numero_vertices+1));
+    VERTICE *grafoComplementar = (VERTICE*)malloc(sizeof(VERTICE) * (numero_vertices+1));
+
+    /* declaracoes */
+    inicializa_matriz(matriz, numero_vertices);
+    inicializa_grafo(grafo, numero_vertices);
+    inicializa_grafo(grafoComplementar, numero_vertices);
+    
+    
+    
+    for (i = 0; i < (numero_vertices*numero_vertices); i++) {
+        fscanf(arquivo, "%d %d %d", &linha, &coluna, &valor);
+        printf("%d, %d, %d \n", linha, coluna, valor);
+
+        if(valor==1) inserir_aresta_matriz(matriz, linha, coluna);
+        matriz_para_lista(matriz, &grafo);
+        print_full(grafo, numero_vertices);
+    }
+}
