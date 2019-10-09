@@ -1135,3 +1135,89 @@ Processing by ArticlesController#index as HTML
 Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.1ms | Allocations: 6884)
 
 
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateComments (20191009011903)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "commenter" varchar, "body" text, "article_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3bf61a60d3"
+FOREIGN KEY ("article_id")
+  REFERENCES "articles" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_article_id" ON "comments" ("article_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191009011903"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/articles" for ::1 at 2019-10-08 22:56:57 -0300
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:14
+  Rendered articles/index.html.erb within layouts/application (Duration: 54.3ms | Allocations: 4582)
+Completed 200 OK in 1500ms (Views: 1175.4ms | ActiveRecord: 1.3ms | Allocations: 1342434)
+
+
+Started GET "/articles/new" for ::1 at 2019-10-08 22:57:02 -0300
+Processing by ArticlesController#new as HTML
+  Rendering articles/new.html.erb within layouts/application
+  Rendered articles/_form.html.erb (Duration: 245.1ms | Allocations: 2731)
+  Rendered articles/new.html.erb within layouts/application (Duration: 251.6ms | Allocations: 3085)
+Completed 200 OK in 275ms (Views: 272.7ms | ActiveRecord: 0.0ms | Allocations: 9431)
+
+
+Started GET "/articles/" for ::1 at 2019-10-08 22:57:11 -0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:14
+  Rendered articles/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 722)
+Completed 200 OK in 25ms (Views: 23.3ms | ActiveRecord: 0.1ms | Allocations: 6908)
+
+
+Started GET "/articles" for ::1 at 2019-10-08 22:57:12 -0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:14
+  Rendered articles/index.html.erb within layouts/application (Duration: 17.9ms | Allocations: 730)
+Completed 200 OK in 26ms (Views: 25.2ms | ActiveRecord: 0.5ms | Allocations: 6906)
+
+
+Started GET "/" for ::1 at 2019-10-08 22:57:13 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 647)
+Completed 200 OK in 15ms (Views: 13.9ms | ActiveRecord: 0.0ms | Allocations: 7351)
+
+
+Started GET "/" for ::1 at 2019-10-08 22:57:13 -0300
+Processing by WelcomeController#index as HTML
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 103)
+Completed 200 OK in 11ms (Views: 10.0ms | ActiveRecord: 0.0ms | Allocations: 6272)
+
+
+Started GET "/articles" for ::1 at 2019-10-08 22:57:15 -0300
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:14
+  Rendered articles/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 726)
+Completed 200 OK in 9ms (Views: 8.3ms | ActiveRecord: 0.1ms | Allocations: 6918)
+
+
+Started GET "/articles/1" for ::1 at 2019-10-08 22:57:17 -0300
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:7:in `show'
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mComment Load (0.6ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:12
+  Rendered articles/show.html.erb within layouts/application (Duration: 692.9ms | Allocations: 13592)
+Completed 200 OK in 705ms (Views: 698.8ms | ActiveRecord: 2.0ms | Allocations: 20747)
+
+
